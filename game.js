@@ -1,5 +1,5 @@
 
-let canvas = document.getElementById("ctx").getContext("2d");
+let canvas = document.getElementById("canvas").getContext("2d");
 
 canvas.width = 4000;
 canvas.height = 900;
