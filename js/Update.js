@@ -42,11 +42,10 @@ update = function(){
     frameCount++;
     score++;
 
-    if(frameCount % 25 === 0)	//every 4 sec
+    if(frameCount % 100 === 0)	//every 4 sec
         randomlyGenerateEnemy();
 
-    if(frameCount % 75 === 0)	//every 3 sec
-        randomlyGenerateUpgrade();
+
 
     player.attackCounter += player.atkSpd;
 
@@ -73,21 +72,11 @@ update = function(){
         }
     }
 
-    for(var key in upgradeList){
-        updateEntity(upgradeList[key]);
-        var isColliding = testCollisionEntity(player,upgradeList[key]);
-        if(isColliding){
-            if(upgradeList[key].category === 'score')
-                score += 1000;
-            if(upgradeList[key].category === 'atkSpd')
-                player.atkSpd += 3;
-            delete upgradeList[key];
-        }
-    }
+    
 
     for(var key in enemyList){
         updateEntity(enemyList[key]);
-
+        var Remove =false;
         var isColliding = testCollisionEntity(player,enemyList[key]);
         var isColliding1 = testCollisionEntity(base,enemyList[key])
         if(isColliding){
@@ -95,20 +84,30 @@ update = function(){
         }
         if(isColliding1){
             base.hp = base.hp - 1;
+            Remove = true;
+            createExplosion(400, 400, "#525252");
+            if (Remove){
+                delete enemyList[key];
+            }
+
         }
+
     }
 
+    for (var i=0; i<particles.length; i++)
+    {
+        var particle = particles[i];
 
+        particle.update(frameCount);
+        particle.draw(ctx);
+    }
 
-
-
-
-
-
-    if(player.hp <= 0){
+    if(base.hp <= 0){
         var timeSurvived = Date.now() - timeWhenGameStarted;
-        console.log("You lost! You survived for " + timeSurvived + " ms.");
-        startNewGame();
+        ctx.fillText("You lost! You survived for " + timeSurvived + " ms.",400,500);
+
+
+
     }
     updateEntity(player);
     updateEntity(base);
@@ -118,4 +117,3 @@ update = function(){
 
 
 }
-s
