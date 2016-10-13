@@ -85,7 +85,8 @@ update = function(){
         if(isColliding1){
             base.hp = base.hp - 1;
             Remove = true;
-            createExplosion(400, 400, "#525252");
+            createExplosion(400, 400, "#525252")
+            createExplosion(450, 450, "#FFA318");
             if (Remove){
                 delete enemyList[key];
             }
@@ -98,7 +99,7 @@ update = function(){
     {
         var particle = particles[i];
 
-        particle.update(frameCount);
+        particle.update(40);
         particle.draw(ctx);
     }
 

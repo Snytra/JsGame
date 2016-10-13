@@ -1,5 +1,6 @@
 startNewGame = function(){
-    player.hp = 10;
+    
+    base.hp=100
     timeWhenGameStarted = Date.now();
     frameCount = 0;
     score = 0;

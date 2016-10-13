@@ -9,7 +9,7 @@ createBase = function(){
         height:100,
         color:'black',
         //
-        hp:10,
+        hp:100,
         
     };
 }
